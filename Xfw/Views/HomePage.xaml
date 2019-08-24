@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Xfw.Views.HomePage"
+             Title="Movies"
+             BackgroundColor="{StaticResource DefaultBackgroundColor}">
+    <ContentPage.Content>
+        <ListView
+            BackgroundColor="{StaticResource DefaultBackgroundColor}"
+            HasUnevenRows="True"
+            SelectionMode="None"
+            SeparatorColor="Transparent"
+            ItemsSource="{Binding Movies}"
+            IsRefreshing="{Binding IsBusy}"
+            ItemTapped="ListView_ItemTapped"
+            CachingStrategy="RecycleElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="8" ColumnSpacing="0" 
+                              RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Image
+                                Grid.Row="0"
+                                HeightRequest="220"
+                                Aspect="AspectFill"
+                                Source="{Binding FullBackdropPath}" />
+                            <BoxView 
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                HeightRequest="220"
+                                Opacity="0.6" Color="{StaticResource DefaultBackgroundColor}" />
+                            <StackLayout 
+                                Margin="16"
+                                Spacing="4"
+                                VerticalOptions="End"
+                                Grid.Row="0"  Grid.RowSpan="2">
+                                <Label 
+                                    TextColor="{StaticResource DefaultTextColor}" 
+                                    Text="{Binding OriginalTitle}"
+                                    FontAttributes="Bold"
+                                    FontSize="Large"/>
+                                <Label
+                                    TextColor="{StaticResource LightTextColor}"
+                                    Text="{Binding ReleaseDate, StringFormat='Release date: {0}'}"
+                                    LineBreakMode="WordWrap"
+                                    FontSize="Medium"/>
+                                <Label
+                                    TextColor="{StaticResource LightTextColor}"
+                                    Text="{Binding Popularity, StringFormat='Popularity: {0} votes'}"
+                                    LineBreakMode="WordWrap"
+                                    FontSize="Medium"/>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate> 
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>
